@@ -328,8 +328,8 @@ case "$1" in
         ;;
 
     transfers)
-        if [ $# -ne 1 ]; then
-            echo "Usage: $SCRIPT transfers"
+        if [ $# -ge 4 ]; then
+            echo "Usage: $SCRIPT transfers [<seconds>] [<max>]"
             exit 1
         fi
 
@@ -341,7 +341,7 @@ case "$1" in
         fi
         shift
 
-        $NODETOOL rpc riak_kv_console transfers $@
+        $NODETOOL rpc riak_core_console transfers $@
         ;;
 
     member[_-]status)
@@ -607,7 +607,7 @@ case "$1" in
     *)
         echo "Usage: $SCRIPT { cluster | join | leave | backup | restore | test | "
         echo "                    reip | js-reload | erl-reload | wait-for-service | "
-        echo "                    ringready | transfers | force-remove | down | "
+        echo "                    ringready | transfers [<seconds>] [<max>] | force-remove | down | "
         echo "                    cluster-info | member-status | ring-status | vnode-status |"
         echo "                    aae-status | diag | status | transfer-limit | "
         echo "                    top [-interval N] [-sort reductions|memory|msg_q] [-lines N] }"
